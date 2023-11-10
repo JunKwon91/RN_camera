@@ -18,9 +18,13 @@
         android:windowSoftInputMode="adjustResize"
         android:exported="true">
         <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-            <category android:name="android.intent.category.LAUNCHER" />
+          <action android:name="android.intent.action.MAIN" />
+          <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
       </activity>
+      <!-- QR/바코드 스캐닝을 위해 MLKit Vision Barcode Scanning API가 사용되며, 먼저 모델(2.2MB)을 다운로드해야 합니다. -->
+      <meta-data
+        android:name="com.google.mlkit.vision.DEPENDENCIES"
+        android:value="barcode" />
     </application>
 </manifest>

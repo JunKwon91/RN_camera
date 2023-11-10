@@ -53,7 +53,6 @@ const CameraScreen = () => {
   const [imgUrl, setImgUrl] = useState<string>('');
 
   // Hook
-  const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = useWindowDimensions();
   const cameraRef = useRef<Camera>(null);
   const back = useCameraDevice('back'); // 후면 카메라
   const front = useCameraDevice('front'); // 전면 카메라
@@ -78,6 +77,7 @@ const CameraScreen = () => {
       enableShutterSound: false, // 셔터소리
     });
 
+    // 사진 저장
     await CameraRoll.save(`file://${photo?.path}`, {
       type: 'photo',
     });
