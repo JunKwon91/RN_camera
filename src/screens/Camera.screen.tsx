@@ -1,10 +1,9 @@
 /* eslint-disable curly */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react-native/no-inline-styles */
 import { CameraRoll } from '@react-native-camera-roll/camera-roll';
 import Slider from '@react-native-community/slider';
 import React, { useEffect, useRef, useState } from 'react';
-import { View, useWindowDimensions } from 'react-native';
+import { View } from 'react-native';
 import {
   GestureEvent,
   GestureHandlerRootView,
@@ -15,6 +14,7 @@ import {
 } from 'react-native-gesture-handler';
 import { Camera, CameraDevice, useCameraDevice } from 'react-native-vision-camera';
 import { styled } from 'styled-components/native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const CaptureBtn = styled.TouchableOpacity`
   position: absolute;
@@ -22,21 +22,29 @@ const CaptureBtn = styled.TouchableOpacity`
   height: 80px;
   border-radius: 40px;
   background-color: white;
-  align-self: center;
   bottom: 20px;
+  align-self: center;
+  align-items: center;
+  justify-content: center;
 `;
-
+const CaptureBtnRed = styled.View`
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  background-color: red;
+`;
 const ChangeBtn = styled.TouchableOpacity`
   position: absolute;
-  left: 30px;
+  right: 30px;
   width: 50px;
   height: 50px;
   border-radius: 40px;
   background-color: blue;
-  align-self: center;
   bottom: 35px;
+  align-self: center;
+  justify-content: center;
+  align-items: center;
 `;
-
 const ThumbnailImg = styled.Image`
   position: absolute;
   bottom: 30px;
@@ -47,7 +55,7 @@ const ThumbnailImg = styled.Image`
 `;
 
 const CameraScreen = () => {
-  // Status
+  // State
   const [cameraPosition, setCameraPosition] = useState<CameraDevice>();
   const [isFrontCamera, setIsFrontCamera] = useState<boolean>(false); // 카메라 전환여부
   const [imgUrl, setImgUrl] = useState<string>('');
@@ -115,7 +123,6 @@ const CameraScreen = () => {
   const onValueChange = (value: number) => {
     // 핀치가 끝났으므로 현재 스케일 값을 기준 스케일로 설정합니다.
     lastZoom.current = zoom;
-
     setZoom(value);
   };
 
@@ -135,8 +142,12 @@ const CameraScreen = () => {
               zoom={zoom}
               photo={true}
             />
-            <CaptureBtn onPress={onPhoto} />
-            <ChangeBtn onPress={onToggleCameraType} />
+            <CaptureBtn onPress={onPhoto}>
+              <CaptureBtnRed />
+            </CaptureBtn>
+            <ChangeBtn onPress={onToggleCameraType}>
+              <Icon name={'refresh'} color={'white'} size={20} />
+            </ChangeBtn>
             {imgUrl?.length > 0 && <ThumbnailImg source={{ uri: imgUrl }} />}
 
             {/* 슬라이더 구현 부분 */}

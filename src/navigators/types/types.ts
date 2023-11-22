@@ -6,6 +6,7 @@ export const STACK_SCREEN_NAME = {
   Camera: 'Camera',
   Qr: 'Qr',
   Album: 'Album',
+  Video: 'Video',
 };
 // # 메인 Stack Param List
 export type StackParamList = {
@@ -13,6 +14,7 @@ export type StackParamList = {
   Camera: undefined;
   Qr: undefined;
   Album: undefined;
+  Video: undefined;
 };
 // * Navigation 타입지정 --------------------------------------------------------
 // # 스택 네비게이션 타입

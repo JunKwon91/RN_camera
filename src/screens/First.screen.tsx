@@ -4,7 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import React, { useEffect } from 'react';
 import { View } from 'react-native';
 import { styled } from 'styled-components/native';
-import { StackNavigationProps } from '../navigators/types/types';
+import { STACK_SCREEN_NAME, StackNavigationProps } from '../navigators/types/types';
 import { useCameraPermission } from 'react-native-vision-camera';
 
 const Container = styled.View`
@@ -33,18 +33,8 @@ const FirstScreen = () => {
   const { hasPermission, requestPermission } = useCameraPermission();
 
   //* Function ---------------------------------------------------------------
-  const onGoScreen = (id: number) => {
-    switch (id) {
-      case 0:
-        navi.navigate('Camera');
-        break;
-      case 1:
-        navi.navigate('Qr');
-        break;
-      case 2:
-        navi.navigate('Album');
-        break;
-    }
+  const onGoScreen = (_screenName: keyof typeof STACK_SCREEN_NAME) => {
+    navi.navigate(_screenName);
   };
 
   //* Lifecycle ------------------------------
@@ -58,18 +48,24 @@ const FirstScreen = () => {
     <Container>
       {hasPermission && (
         <>
-          <Btn onPress={() => onGoScreen(0)}>
-            <BtnText>촬영</BtnText>
+          <Btn onPress={() => onGoScreen('Camera')}>
+            <BtnText>사진</BtnText>
           </Btn>
 
           <View style={{ marginTop: 20 }}>
-            <Btn onPress={() => onGoScreen(1)}>
+            <Btn onPress={() => onGoScreen('Qr')}>
               <BtnText>Qr</BtnText>
             </Btn>
           </View>
 
           <View style={{ marginTop: 20 }}>
-            <Btn onPress={() => onGoScreen(2)}>
+            <Btn onPress={() => onGoScreen('Video')}>
+              <BtnText>동영상</BtnText>
+            </Btn>
+          </View>
+
+          <View style={{ marginTop: 20 }}>
+            <Btn onPress={() => onGoScreen('Album')}>
               <BtnText>앨범</BtnText>
             </Btn>
           </View>

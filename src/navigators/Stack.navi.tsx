@@ -5,6 +5,7 @@ import FirstScreen from '../screens/First.screen';
 import CameraScreen from '../screens/Camera.screen';
 import AlbumScreen from '../screens/Album.screen';
 import QrScreen from '../screens/Qr.screen';
+import VideoScreen from '../screens/Video.screen';
 
 const StackNavigator = () => {
   const Stack = createNativeStackNavigator<StackParamList>();
@@ -36,6 +37,13 @@ const StackNavigator = () => {
         }}
         name={'Qr'}
         component={QrScreen}
+      />
+      <Stack.Screen
+        options={{
+          headerShown: false,
+        }}
+        name={'Video'}
+        component={VideoScreen}
       />
       <Stack.Screen
         options={{
